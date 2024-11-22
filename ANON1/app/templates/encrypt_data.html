@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Encryption</title>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+        
+        <div class="module">
+            <h1>Data Encryption</h1>
+            <p>The Data Encryption Tool offers a robust solution for securing sensitive data through encryption. Using symmetric encryption algorithms, this tool transforms readable data into an encoded format that can only be deciphered with a specific key. Encryption is a fundamental aspect of data security, protecting information from unauthorized access and ensuring confidentiality. This tool is particularly useful for organizations that handle sensitive information, such as financial records or personal data, providing an additional layer of security. By encrypting data, users can safeguard against data breaches and ensure that only authorized parties can access the original information.</p>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Upload CSV File:</label>
+                    <input type="file" id="file" name="file" accept=".csv" required>
+                </div>
+                <button type="submit">Encrypt Data</button>
+            </form>
+            {% if tables %}
+            <div id="results">
+                <h2>Encrypted Data:</h2>
+                {{ tables|safe }}
+                <p><strong>Encryption Key:</strong> {{ key }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('toolbox') }}" class="back-button">← Back to Home</a>
+    
+    <h1>Data Masking</h1>
+    
+    <div class="tool-description">
+        <p>The Data Masking Tool provides a secure way to obscure sensitive information while maintaining data format and integrity. This tool replaces sensitive data with realistic-looking substitute characters or data.</p>
+        <p>Common masking patterns include:</p>
+        <ul>
+            <li>Credit Card Numbers: XXXX-XXXX-XXXX-1234</li>
+            <li>Phone Numbers: (XXX) XXX-1234</li>
+            <li>Email Addresses: j***@example.com</li>
+            <li>Social Security Numbers: XXX-XX-1234</li>
+        </ul>
+        <p>This approach allows for data protection while maintaining the usefulness of the dataset for testing and development purposes.</p>
+    </div>
+
+    <div class="upload-section">
+        <h2>Upload Data for Masking</h2>
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-input-container">
+                <input type="file" name="file" id="file" accept=".csv" required>
+                <label for="file" class="file-label">Choose File</label>
+                <span id="file-name">No file chosen</span>
+            </div>
+            
+            <div class="masking-options">
+                <h3>Select Masking Options</h3>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="mask_email" checked>
+                        Mask Email Addresses
+                    </label>
+                    <label>
+                        <input type="checkbox" name="mask_phone" checked>
+                        Mask Phone Numbers
+                    </label>
+                    <label>
+                        <input type="checkbox" name="mask_credit_card" checked>
+                        Mask Credit Card Numbers
+                    </label>
+                    <label>
+                        <input type="checkbox" name="mask_ssn" checked>
+                        Mask Social Security Numbers
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit" class="button">Apply Masking</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('file').addEventListener('change', function() {
+        const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+        document.getElementById('file-name').textContent = fileName;
+    });
+</script>
+{% endblock %} 

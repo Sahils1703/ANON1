@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('toolbox') }}" class="back-button">← Back to Home</a>
+    
+    <h1>Email Validator</h1>
+    
+    <div class="tool-description">
+        <p>Validate email addresses for format and domain existence. This tool checks for:</p>
+        <ul>
+            <li>→ Proper email format</li>
+            <li>→ Valid domain existence</li>
+            <li>→ MX record verification</li>
+            <li>→ Common typos and errors</li>
+        </ul>
+    </div>
+
+    <div class="validator-section">
+        <form method="POST" class="validator-form">
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" 
+                       id="email" 
+                       name="email" 
+                       placeholder="Enter email to validate..."
+                       required>
+            </div>
+            <button type="submit" class="button">Validate Email</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box {% if result.is_valid %}valid{% else %}invalid{% endif %}">
+            <h3>Validation Results:</h3>
+            <div class="result-details">
+                <p>Status: {{ "Valid" if result.is_valid else "Invalid" }}</p>
+                {% if result.message %}
+                <p>Details: {{ result.message }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

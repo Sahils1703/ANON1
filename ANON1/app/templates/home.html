@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Data Privacy{% endblock %}
+
+{% block content %}
+<div class="matrix-background">
+    <div class="welcome-container">
+        <h1 class="welcome-title">WELCOME TO OUR DATA PRIVACY<br>AND SECURITY PLATFORM</h1>
+        
+        <p class="welcome-text">
+            In today's digital age, protecting your data is more important than ever. Our platform offers a comprehensive suite of tools designed to enhance your data privacy and security. Whether you're an individual looking to safeguard personal information or a business aiming to comply with data protection regulations, our tools provide the solutions you need. From anonymizing sensitive data to generating strong passwords, we're committed to helping you protect your digital footprint. Explore our tools and take control of your data privacy today.
+        </p>
+
+        <a href="{{ url_for('toolbox') }}" class="matrix-button">HERE'S WHAT WE OFFER</a>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('toolbox') }}" class="back-link">← Back to Home</a>
+    
+    <h1 class="glow-text">METADATA CLEANER</h1>
+    
+    <div class="content-box">
+        <div class="description-text">
+            <p>Remove sensitive metadata from your files before sharing them. Supports various file types including images, documents, and PDFs.</p>
+            
+            <div class="metadata-info">
+                <h3>Metadata That Can Be Removed:</h3>
+                <ul>
+                    <li>GPS Location Data</li>
+                    <li>Device Information</li>
+                    <li>Creation/Modification Dates</li>
+                    <li>Author Details</li>
+                    <li>Software Information</li>
+                    <li>Camera Settings</li>
+                </ul>
+            </div>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="cleaner-form">
+            <div class="form-group">
+                <label for="file">Select File:</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="file" name="file" required>
+                    <div class="file-input-text">Choose a file or drag it here</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Metadata to Remove:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="metadata_types" value="location" checked>
+                        Location Data
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="metadata_types" value="device" checked>
+                        Device Info
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="metadata_types" value="dates" checked>
+                        Dates
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="metadata_types" value="author" checked>
+                        Author Info
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="glow-button">Clean Metadata</button>
+        </form>
+
+        {% if cleaned_file %}
+        <div class="result-box">
+            <h3>Metadata Cleaning Results:</h3>
+            <div class="metadata-results">
+                <p>✓ File cleaned successfully</p>
+                <p>Original metadata removed: {{ removed_metadata|length }} items</p>
+                <a href="{{ url_for('download_cleaned_file') }}" class="download-button">Download Cleaned File</a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error-box">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.description-text {
+    color: #00ff41;
+    margin-bottom: 30px;
+}
+
+.metadata-info {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+}
+
+.metadata-info ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.metadata-info li {
+    margin: 10px 0;
+    position: relative;
+}
+
+.metadata-info li:before {
+    content: "→";
+    position: absolute;
+    left: -20px;
+    color: #00ff41;
+}
+
+.cleaner-form {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #00ff41;
+}
+
+.file-input-wrapper {
+    position: relative;
+    height: 100px;
+    border: 2px dashed #00ff41;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-input-text {
+    color: #00ff41;
+    text-align: center;
+    pointer-events: none;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #00ff41;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #00ff41;
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+}
+
+.metadata-results {
+    color: #00ff41;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.download-button:hover {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+.error-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid #ff4141;
+    color: #ff4141;
+    border-radius: 4px;
+}
+
+.glow-button {
+    padding: 10px 20px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glow-button:hover {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+</style>
+
+<script>
+document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+    const fileName = e.target.files[0]?.name;
+    if (fileName) {
+        document.querySelector('.file-input-text').textContent = fileName;
+    } else {
+        document.querySelector('.file-input-text').textContent = 'Choose a file or drag it here';
+    }
+});
+</script>
+{% endblock %} 

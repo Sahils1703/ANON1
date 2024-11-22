@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>QR Code Generator</h1>
+    <p>Convert URLs, contact info, or text into QR codes for quick sharing</p>
+
+    <div class="qr-generator">
+        <form method="POST" id="qrForm">
+            <textarea 
+                name="text" 
+                id="text" 
+                placeholder="Enter URL or text here..." 
+                required></textarea>
+            <button type="submit" class="btn btn-primary">Generate QR Code</button>
+        </form>
+        <div id="qrResult"></div>
+    </div>
+</div>
+
+<style>
+.qr-generator {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#qrResult {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#qrResult img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+<script>
+document.getElementById('qrForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('/qr-generator', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const qrResult = document.getElementById('qrResult');
+        qrResult.innerHTML = `
+            <img src="${url}" alt="QR Code">
+            <br>
+            <a href="${url}" download="qrcode.png" class="btn btn-secondary mt-3">
+                Download QR Code
+            </a>
+        `;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error generating QR code');
+    });
+});
+</script>
+{% endblock %} 

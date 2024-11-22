@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cyber-container">
+    <h2 class="cyber-title">SECURE NOTES</h2>
+    
+    <div class="cyber-tabs">
+        <button class="cyber-tab" onclick="showTab('encrypt')">Encrypt Note</button>
+        <button class="cyber-tab" onclick="showTab('decrypt')">Decrypt Note</button>
+    </div>
+
+    <!-- Encrypt Section -->
+    <div id="encrypt-section" class="cyber-section">
+        <form method="POST" action="{{ url_for('secure_notes_route') }}">
+            <input type="hidden" name="action" value="encrypt">
+            <div class="cyber-form-group">
+                <label>Note Content:</label>
+                <textarea name="note_content" class="cyber-input" required></textarea>
+            </div>
+            <div class="cyber-form-group">
+                <label>Password:</label>
+                <input type="password" name="password" class="cyber-input" required>
+            </div>
+            <button type="submit" class="cyber-button">Encrypt Note</button>
+        </form>
+    </div>
+
+    <!-- Decrypt Section -->
+    <div id="decrypt-section" class="cyber-section" style="display:none;">
+        <form method="POST" action="{{ url_for('secure_notes_route') }}">
+            <input type="hidden" name="action" value="decrypt">
+            <div class="cyber-form-group">
+                <label>Encrypted Note:</label>
+                <textarea name="encrypted_note" class="cyber-input" required></textarea>
+            </div>
+            <div class="cyber-form-group">
+                <label>Password:</label>
+                <input type="password" name="password" class="cyber-input" required>
+            </div>
+            <button type="submit" class="cyber-button">Decrypt Note</button>
+        </form>
+    </div>
+
+    {% if encrypted_note %}
+    <div class="cyber-result">
+        <h3>Encrypted Note:</h3>
+        <div class="cyber-encrypted-text">
+            {{ encrypted_note }}
+            <button class="cyber-copy-button" onclick="copyToClipboard('{{ encrypted_note }}')">Copy</button>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if decrypted_note %}
+    <div class="cyber-result">
+        <h3>Decrypted Note:</h3>
+        <div class="cyber-decrypted-text">
+            {{ decrypted_note }}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function showTab(tab) {
+    document.getElementById('encrypt-section').style.display = tab === 'encrypt' ? 'block' : 'none';
+    document.getElementById('decrypt-section').style.display = tab === 'decrypt' ? 'block' : 'none';
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+    });
+}
+</script>
+{% endblock %} 

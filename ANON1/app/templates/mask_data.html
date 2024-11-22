@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Masking</title>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+        
+        <div class="module">
+            <h1>Data Masking</h1>
+            <p>The Data Masking Tool provides a method to obscure sensitive data by replacing it with a consistent pattern, such as asterisks or hashes. This technique is essential for protecting data in environments where it is necessary to maintain the structure of the data but hide its actual content. Data masking is widely used in testing and development environments to ensure that sensitive information is not exposed to unauthorized users. By masking data, organizations can prevent data breaches and unauthorized access, while still allowing developers and analysts to work with realistic datasets. This tool supports CSV files, applying masking to text fields to ensure data privacy.</p>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Upload CSV File:</label>
+                    <input type="file" id="file" name="file" accept=".csv" required>
+                </div>
+                <button type="submit">Mask Data</button>
+            </form>
+            {% if tables %}
+            <div id="results">
+                <h2>Masked Data:</h2>
+                {{ tables|safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 

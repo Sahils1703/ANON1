@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('toolbox') }}" class="back-link">← Back to Home</a>
+    
+    <h1 class="glow-text">File Integrity Checker</h1>
+    
+    <div class="content-box">
+        <p class="description">Verify the integrity of your files using hash functions.</p>
+
+        <form method="POST" enctype="multipart/form-data" class="integrity-form">
+            <div class="form-group">
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" name="file" class="file-input">
+            </div>
+
+            <div class="form-group">
+                <label for="algorithm">Hash Algorithm:</label>
+                <select id="algorithm" name="algorithm" class="algorithm-select">
+                    <option value="SHA-256">SHA-256</option>
+                    <option value="MD5">MD5</option>
+                    <option value="SHA-1">SHA-1</option>
+                    <option value="SHA-512">SHA-512</option>
+                </select>
+            </div>
+
+            <button type="submit" class="glow-button">Check Integrity</button>
+        </form>
+
+        {% if file_hash %}
+        <div class="result-box">
+            <h3>Hash Result:</h3>
+            <pre>{{ file_hash }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+body {
+    background-color: #000;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.back-link {
+    color: #00ff41;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    text-shadow: 0 0 10px #00ff41;
+}
+
+.glow-text {
+    color: #00ff41;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    margin-bottom: 30px;
+}
+
+.description {
+    color: #00ff41;
+    margin-bottom: 20px;
+}
+
+.content-box {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.integrity-form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #00ff41;
+}
+
+.file-input {
+    width: 100%;
+    padding: 8px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.algorithm-select {
+    width: 100%;
+    padding: 8px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.algorithm-select option {
+    background-color: #000;
+    color: #00ff41;
+}
+
+.glow-button {
+    padding: 10px 20px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glow-button:hover {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+}
+
+.result-box pre {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow-x: auto;
+    color: #00ff41;
+}
+</style>
+{% endblock %} 

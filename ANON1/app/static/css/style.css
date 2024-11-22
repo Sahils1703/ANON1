@@ -1,0 +1,355 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Courier New', monospace;
+    color: #00ff41;
+    background-color: #000;
+    background-image: url('/static/images/matrix_background.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.tools-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.tool-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #00ff41;
+    border-radius: 8px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
+}
+
+.tool-card h2 {
+    color: #00ff41;
+    margin: 0 0 15px 0;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+}
+
+.tool-card p {
+    color: #00ff41;
+    margin: 0 0 20px 0;
+    opacity: 0.8;
+}
+
+.tool-card a {
+    color: #00ff41;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.tool-card a:hover {
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tools-container {
+        padding: 20px;
+    }
+}
+
+/* IP Tracker Styles */
+.cyber-container {
+    background-color: #000;
+    color: #00ff00;
+    padding: 2rem;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.cyber-title {
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.cyber-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Courier New', monospace;
+}
+
+.cyber-form-container {
+    background-color: rgba(0, 255, 0, 0.1);
+    padding: 1.5rem;
+    border: 1px solid #00ff00;
+}
+
+.cyber-input {
+    background-color: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
+}
+
+.cyber-button {
+    background-color: #000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+}
+
+.cyber-button:hover {
+    background-color: #00ff00;
+    color: #000;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.cyber-results {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #00ff00;
+}
+
+.cyber-table {
+    width: 100%;
+}
+
+.cyber-row {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+    padding: 0.5rem 0;
+}
+
+.cyber-cell-label {
+    flex: 1;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cyber-cell-value {
+    flex: 2;
+}
+
+.cyber-error {
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Matrix Background Animation */
+.matrix-background {
+    position: relative;
+    min-height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.matrix-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.9)
+    ),
+    url('../images/matrix-bg.gif');
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.welcome-container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.welcome-title {
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    line-height: 1.4;
+}
+
+.welcome-text {
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: justify;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+.matrix-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.matrix-button:hover {
+    background-color: #00ff00;
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-container {
+        margin: 2rem;
+        padding: 1.5rem;
+    }
+
+    .welcome-title {
+        font-size: 1.5rem;
+    }
+
+    .welcome-text {
+        font-size: 1rem;
+    }
+}
+
+/* Matrix Rain Animation */
+@keyframes matrix-rain {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 0% 100%;
+    }
+}
+
+.matrix-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    background: linear-gradient(0deg, transparent 0%, rgba(0, 255, 0, 0.2) 50%, transparent 100%);
+    animation: matrix-rain 20s linear infinite;
+    z-index: 1;
+}
+
+.cyber-password {
+    background-color: rgba(0, 255, 0, 0.1);
+    padding: 1rem;
+    border: 1px solid #00ff00;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+}
+
+.cyber-copy-button {
+    background-color: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+.cyber-copy-button:hover {
+    background-color: #00ff00;
+    color: #000;
+}
+
+.password-strength {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #00ff00;
+}
+
+.cyber-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.cyber-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #00ff00;
+}
+
+.cyber-input {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+}
+
+.cyber-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+.cyber-hash {
+    background-color: rgba(0, 255, 0, 0.1);
+    padding: 1rem;
+    border: 1px solid #00ff00;
+    margin: 1rem 0;
+    word-break: break-all;
+    font-family: 'Courier New', monospace;
+}

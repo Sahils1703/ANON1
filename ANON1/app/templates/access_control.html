@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Control</title>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+        
+        <div class="module">
+            <h1>Access Control</h1>
+            <p>The Data Access Control Tool implements a system for managing and restricting access to data based on user roles. Access control is a critical component of data security, ensuring that only authorized users can view or modify sensitive information. This tool allows organizations to define roles and permissions, providing a structured approach to data access management. By using access control, organizations can prevent unauthorized access and protect sensitive data from potential breaches. This tool supports role-based access, allowing administrators to assign roles such as 'admin', 'editor', or 'viewer', and enforce access policies accordingly.</p>
+            <form method="post">
+                <div class="form-group">
+                    <label for="role">Enter Your Role:</label>
+                    <input type="text" id="role" name="role" required>
+                </div>
+                <button type="submit">Check Access</button>
+            </form>
+            {% if has_access is not none %}
+            <div id="results">
+                {% if has_access %}
+                <p>You have access to this data.</p>
+                {% else %}
+                <p>You do not have access to this data.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 

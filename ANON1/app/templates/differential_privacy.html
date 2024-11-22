@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Differential Privacy</title>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+        
+        <div class="module">
+            <h1>Differential Privacy</h1>
+            <p>The Data Differential Privacy Tool applies advanced privacy techniques to datasets, allowing for data analysis while preserving individual privacy. Differential privacy introduces noise into the data, making it difficult to identify specific individuals within a dataset. This approach is particularly valuable in scenarios where data needs to be shared or analyzed without compromising privacy. By using differential privacy, organizations can provide insights and analytics while adhering to privacy regulations. This tool processes CSV files, adding noise to the data to ensure that individual records remain confidential, thus enabling secure data analysis and sharing.</p>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Upload CSV File:</label>
+                    <input type="file" id="file" name="file" accept=".csv" required>
+                </div>
+                <button type="submit">Apply Differential Privacy</button>
+            </form>
+            {% if tables %}
+            <div id="results">
+                <h2>Noisy Data:</h2>
+                {{ tables|safe }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html> 

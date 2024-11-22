@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Tools - Data Privacy{% endblock %}
+
+{% block content %}
+<div class="tools-container">
+    <div class="tools-grid">
+        <div class="tool-card">
+            <h2>DATA ANONYMIZATION</h2>
+            <p>Anonymize sensitive data in your dataset.</p>
+            <a href="{{ url_for('anonymize') }}">Anonymize Data</a>
+        </div>
+        
+        <div class="tool-card">
+            <h2>PASSWORD GENERATOR</h2>
+            <p>Generate strong, random passwords.</p>
+            <a href="{{ url_for('generate_password_route') }}">Generate Password</a>
+        </div>
+        
+        <div class="tool-card">
+            <h2>SECURE NOTES</h2>
+            <p>Store and retrieve encrypted notes securely.</p>
+            <a href="{{ url_for('secure_notes_route') }}">Secure Notes</a>
+        </div>
+        
+        <div class="tool-card">
+            <h2>EMAIL VALIDATOR</h2>
+            <p>Validate email addresses for format and domain existence.</p>
+            <a href="{{ url_for('validate_email_route') }}">Validate Email</a>
+        </div>
+        
+        <div class="tool-card">
+            <h2>HASH GENERATOR</h2>
+            <p>Generate secure hashes for your data.</p>
+            <a href="{{ url_for('hash_generator') }}">Generate Hash</a>
+        </div>
+        
+        <div class="tool-card">
+            <h2>FILE INTEGRITY</h2>
+            <p>Verify file integrity using checksums.</p>
+            <a href="{{ url_for('check_integrity') }}">Check Integrity</a>
+        </div>
+        
+        <div class="tool-card">
+            <h2 class="tool-title">IP TRACKER</h2>
+            <p class="tool-description">Track and analyze IP addresses for location and network information.</p>
+            <a href="{{ url_for('ip_tracker_route') }}" class="tool-link">Track IP</a>
+        </div>
+
+        <div class="tool-card">
+            <h2>QR GENERATOR</h2>
+            <p>Convert URLs, contact info, or text into QR codes for quick sharing.</p>
+            <a href="{{ url_for('qr_generator') }}">Generate QR Code</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

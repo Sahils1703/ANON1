@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cyber-container">
+    <h2 class="cyber-title">FILE INTEGRITY CHECKER</h2>
+    
+    <div class="cyber-form-container">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="cyber-form-group">
+                <label for="file" class="cyber-label">Select File:</label>
+                <input type="file" id="file" name="file" class="cyber-input" required>
+            </div>
+            
+            <div class="cyber-form-group">
+                <label for="algorithm" class="cyber-label">Hash Algorithm:</label>
+                <select id="algorithm" name="algorithm" class="cyber-input">
+                    <option value="sha256">SHA-256</option>
+                    <option value="sha1">SHA-1</option>
+                    <option value="md5">MD5</option>
+                    <option value="sha512">SHA-512</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="cyber-button">Calculate Hash</button>
+        </form>
+
+        {% if error %}
+        <div class="cyber-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if file_hash %}
+        <div class="cyber-result">
+            <h3>File Hash:</h3>
+            <div class="cyber-hash">
+                <span id="hash-text">{{ file_hash }}</span>
+                <button class="cyber-copy-button" onclick="copyHash()">Copy</button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function copyHash() {
+    const hashText = document.getElementById('hash-text').textContent;
+    navigator.clipboard.writeText(hashText).then(() => {
+        alert('Hash copied to clipboard!');
+    });
+}
+</script>
+{% endblock %} 

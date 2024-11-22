@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .module {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .strength-meter {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .strength-meter-fill {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .feedback-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .feedback-list li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feedback-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+        }
+
+        .strength-text {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .very-weak { background-color: #e74c3c; width: 20%; }
+        .weak { background-color: #e67e22; width: 40%; }
+        .medium { background-color: #f1c40f; width: 60%; }
+        .strong { background-color: #2ecc71; width: 80%; }
+        .very-strong { background-color: #27ae60; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+        
+        <div class="module">
+            <h1>Password Strength Checker</h1>
+            <div class="form-group">
+                <label for="password-check">Password:</label>
+                <input type="password" id="password-check" required>
+                <button onclick="checkStrength()">Check Strength</button>
+            </div>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkStrength() {
+            const password = document.getElementById('password-check').value;
+            let score = 0;
+            let feedback = [];
+
+            // Length check
+            if (password.length < 8) {
+                feedback.push("Password should be at least 8 characters long");
+            } else {
+                score++;
+            }
+
+            // Uppercase check
+            if (!/[A-Z]/.test(password)) {
+                feedback.push("Add uppercase letters");
+            } else {
+                score++;
+            }
+
+            // Lowercase check
+            if (!/[a-z]/.test(password)) {
+                feedback.push("Add lowercase letters");
+            } else {
+                score++;
+            }
+
+            // Number check
+            if (!/\d/.test(password)) {
+                feedback.push("Add numbers");
+            } else {
+                score++;
+            }
+
+            // Special character check
+            if (!/[!@#$%^&*]/.test(password)) {
+                feedback.push("Add special characters");
+            } else {
+                score++;
+            }
+
+            const strength = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'][score];
+            
+            document.getElementById('results').innerHTML = `
+                <div class="strength-text">Strength: ${strength}</div>
+                <ul class="feedback-list">
+                    ${feedback.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html> 

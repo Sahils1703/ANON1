@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('toolbox') }}" class="back-button">← Back to Home</a>
+    
+    <h1>Data Encryption</h1>
+    
+    <div class="tool-description">
+        <p>The Data Encryption Tool provides military-grade encryption for your sensitive data. Using advanced encryption algorithms, this tool ensures your data remains secure and unreadable without the proper decryption key.</p>
+        <p>Features include:</p>
+        <ul>
+            <li>AES-256 encryption standard</li>
+            <li>Secure key generation</li>
+            <li>File-level encryption</li>
+            <li>Column-specific encryption for CSV files</li>
+        </ul>
+        <p>Perfect for protecting confidential information, personal data, and sensitive business documents.</p>
+    </div>
+
+    <div class="upload-section">
+        <h2>Upload Data for Encryption</h2>
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-input-container">
+                <input type="file" name="file" id="file" required>
+                <label for="file" class="file-label">Choose File</label>
+                <span id="file-name">No file chosen</span>
+            </div>
+            
+            <div class="encryption-options">
+                <h3>Encryption Settings</h3>
+                <div class="option-group">
+                    <label for="encryption-method">Encryption Method:</label>
+                    <select name="encryption-method" id="encryption-method">
+                        <option value="aes">AES-256</option>
+                        <option value="blowfish">Blowfish</option>
+                        <option value="twofish">Twofish</option>
+                    </select>
+                    
+                    <label for="key-type">Key Management:</label>
+                    <select name="key-type" id="key-type">
+                        <option value="auto">Auto-generate Key</option>
+                        <option value="manual">Provide Own Key</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="button">Encrypt Data</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('file').addEventListener('change', function() {
+        const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+        document.getElementById('file-name').textContent = fileName;
+    });
+</script>
+{% endblock %} 

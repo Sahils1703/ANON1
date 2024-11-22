@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="matrix-container">
+    <a href="{{ url_for('toolbox') }}" class="back-link">← Back to Home</a>
+    
+    <h1 class="glow-text">DATA ANONYMIZATION</h1>
+    
+    <div class="description-text">
+        <p>The Data Anonymization Tool is designed to protect sensitive information within datasets by replacing identifiable data with pseudonyms or random values. This process ensures that personal identifiers are removed, making it difficult to trace data back to individuals.</p>
+        
+        <p>Anonymization is crucial in maintaining privacy, especially when sharing data for research or analysis. By using this tool, organizations can comply with data protection regulations like GDPR, which mandate the safeguarding of personal data.</p>
+        
+        <p>The tool processes CSV files, systematically anonymizing text fields to prevent unauthorized identification, thus enabling safe data sharing and analysis without compromising individual privacy.</p>
+    </div>
+
+    <div class="upload-section">
+        <h2 class="glow-text">UPLOAD CSV FILE</h2>
+        <form method="POST" action="{{ url_for('anonymize') }}" enctype="multipart/form-data" class="upload-form">
+            <div class="file-input-wrapper">
+                <input type="file" name="file" id="file" accept=".csv" required>
+                <label for="file" class="file-label">Choose File</label>
+                <span id="file-name" class="file-name">No file chosen</span>
+            </div>
+            <button type="submit" class="glow-button">ANONYMIZE DATA</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('file').addEventListener('change', function() {
+    const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+    document.getElementById('file-name').textContent = fileName;
+});
+</script>
+{% endblock %} 
